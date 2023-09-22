@@ -1,9 +1,8 @@
 const express = require('express');
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('Hannah Birch');
-});
+app.use('/', require('./routes'));
+
 
 const PORT = 3000;
 
