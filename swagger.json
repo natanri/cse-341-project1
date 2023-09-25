@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "description": ""
   },
-  "host": "project1-pf9s.onrender.com",
+  "host": "https://project1-pf9s.onrender.com",
   "basePath": "/",
   "schemes": [    
     "https"
