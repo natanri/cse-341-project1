@@ -3,6 +3,7 @@ const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async(req, res) => {
+    //#swagger.tag=['Users'];
     const result = await mongodb.getDatabase().db().collection('users').find();
     result.toArray().then((users) => {
         res.setHeader('Content-Type', 'aplication/json');
@@ -12,6 +13,7 @@ const getAll = async(req, res) => {
 };
 
 const getSingle = async(req, res) => {
+    //#swagger.tag=['Users'];
     const userId = new ObjectId(req.params.id);
     const result = await mongodb.getDatabase().db().collection('users').find({_id: userId});
     result.toArray().then((users) => {
@@ -20,7 +22,8 @@ const getSingle = async(req, res) => {
     });
 };
 
-/*const createUser = async (req, res) => {
+const createUser = async (req, res) => {
+    //#swagger.tag=['Users'];
     const user = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -37,6 +40,7 @@ const getSingle = async(req, res) => {
 };
 
 const updateUser = async (req, res)=> {
+    //#swagger.tag=['Users'];
     const userId = new ObjectId(req.params.id);
     const user = {
         username: req.body.username,
@@ -53,6 +57,7 @@ const updateUser = async (req, res)=> {
 };
 
 const deleteUser = async (req, res)=> {
+    //#swagger.tag=['Users'];
     const userId = new ObjectId(req.params.id);
     const user = {
         username: req.body.username,
@@ -60,18 +65,18 @@ const deleteUser = async (req, res)=> {
         name: req.body.name,
         ipaddress: req.body.ipaddress
     };
-    const response = await mongodb.getDatabase().db().collection('users').remove({ _id: userId }, true);
+    const response = await mongodb.getDatabase().db().collection('users').deleteOne({ _id: userId });
     if (response.deleteCount > 0){
         res.status(204).send();
     } else {
         res.status(500).json(response.error || 'Some error occurred while updating the user.');
     }
-};*/
+};
 
 module.exports = {
     getAll,
     getSingle,
-    //createUser,
-    //updateUser,
-    //deleteUser
+    createUser,
+    updateUser,
+    deleteUser
 };
